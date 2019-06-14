@@ -244,4 +244,5 @@ class BaseSchemaGenerator:
         return schema_creation_string
 
     async def generate_from_string(self, creation_string: str) -> None:
+        print("\nBBBBBBB\n")
         await self.client.execute_script(creation_string)

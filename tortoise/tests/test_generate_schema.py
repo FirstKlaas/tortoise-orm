@@ -137,7 +137,7 @@ class TestGenerateSchemaMySQL(TestGenerateSchema):
     async def init_for(self, module: str, safe=False) -> None:
         if self.engine != "tortoise.backends.mysql":
             raise test.SkipTest("mysql only")
-        with patch("aiomysql.connect", new=CoroutineMock()):
+        with patch("aiomysql.create_pool", new=CoroutineMock()):
             await Tortoise.init(
                 {
                     "connections": {
@@ -184,7 +184,7 @@ class TestGenerateSchemaPostgresSQL(TestGenerateSchema):
     async def init_for(self, module: str, safe=False) -> None:
         if self.engine != "tortoise.backends.asyncpg":
             raise test.SkipTest("asyncpg only")
-        with patch("asyncpg.connect", new=CoroutineMock()):
+        with patch("asyncpg.create_pool", new=CoroutineMock()):
             await Tortoise.init(
                 {
                     "connections": {
